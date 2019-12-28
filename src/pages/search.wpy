@@ -1,0 +1,144 @@
+<style lang="less">
+.hisBox-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 0 10px;
+  font-size: 15px;
+}
+
+.van-tag {
+  margin: 0 10px;
+}
+</style>
+
+<template>
+  <div class="search">
+    <van-search
+      value="{{ searchValue }}"
+      placeholder="请输入搜索关键词"
+      show-action
+      bind:change="onChange" 
+      bind:search="onSearch"
+      bind:cancel="onCancel"
+    />
+    <!-- 搜索历史 -->
+    <div v-if="showHis">
+      <div class="hisBox-head">
+        <text>最近搜索</text>
+        <van-icon name="delete" @tap="clearHistory" />
+      </div>
+      <div class="search-tags">
+        <van-divider v-if="pageHistList.length === 0" contentPosition="center">当前无搜索历史</van-divider>
+        <div v-else>
+          <van-tag round v-for="(item, i) in pageHistList" :key="i" @tap="histJump(item)">{{item}}</van-tag>
+        </div>
+      </div>
+    </div>
+    <!-- 搜索推荐 -->
+    <van-cell-group v-else>
+      <van-cell v-for="item in qsearch" :key="item.goods_id" title="{{item.goods_name}}" @tap="jumpDetail(item.goods_id)" />
+    </van-cell-group>
+    <!-- 清除历史记录 -->
+    <van-dialog id="van-dialog" />
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  import searchReq from '@/api/searchReq'
+  import Dialog from '@/static/vant/dialog/dialog'
+
+  wepy.page({
+    data: {
+      // 推荐列表
+      qsearch: [],
+      searchValue: '',
+      pageHistList: [],
+      timer: null
+    },
+    onLoad () {
+      this.pageHistList = wx.getStorageSync('histList') || []
+    },
+    methods: {
+      async getQsearchList () {
+        let { data: res } = await searchReq.getQsearch(this.searchValue)
+        if (res.meta.status !== 200) {
+          return wepy.baseToast()
+        }
+        this.qsearch = res.message
+      },
+      onChange (event) {
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
+          this.searchValue = event.$wx.detail.trim()
+          if (this.searchValue) {
+            this.getQsearchList()
+          } else {
+            this.qsearch = []
+            this.searchValue = ''
+          }
+        }, 800)
+      },
+      onSearch () {
+        if (this.searchValue.trim().length !== 0) {
+          this.pageHistList = wx.getStorageSync('histList') || []
+          if (!this.pageHistList.includes(this.searchValue)) {
+            this.pageHistList.unshift(this.searchValue)
+            wx.setStorageSync('histList', this.pageHistList)
+          }
+          wx.navigateTo({
+            url: `/pages/goods_list?query=${this.searchValue}`
+          })
+          this.searchValue = ''
+          this.qsearch = []
+        }
+      },
+      onCancel () {
+        this.searchValue = ''
+        this.qsearch = []
+      },
+      clearHistory () {
+        console.log('object')
+        Dialog.confirm({
+          title: '确认',
+          message: '确认删除历史记录吗？'
+        }).then(() => {
+          wx.removeStorageSync('histList')
+          this.pageHistList = []
+        })
+      },
+      histJump (arg) {
+        wx.navigateTo({
+          url: `/pages/goods_list?query=${arg}`
+        })
+      },
+      jumpDetail (id) {
+        wx.navigateTo({
+          url: `/pages/goodsDetail?id=${id}`
+        })
+        this.searchValue = ''
+        this.qsearch = []
+      }
+    },
+    computed: {
+      showHis () {
+        return this.searchValue.trim().length === 0
+      }
+    }
+  })
+</script>
+<config>
+{
+    navigationBarTitleText: '搜索',
+    usingComponents: {
+      'van-search': '../static/vant/search/index',
+      'van-cell': "../static/vant/cell/index",
+      'van-cell-group': '../static/vant/cell-group/index',
+      'van-icon': '../static/vant/icon/index',
+      'van-divider': '../static/vant/divider/index',
+      'van-tag': '../static/vant/tag/index',
+      'van-dialog': '../static/vant/dialog/index',
+    }
+}
+</config>

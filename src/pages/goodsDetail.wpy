@@ -1,0 +1,253 @@
+<style lang="less">
+.swiper {
+  height: 720rpx;
+  image {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.forsell {
+  border-top: 10px solid #f5f5f5;
+  border-bottom: 10px solid #f5f5f5;
+  font-size: 24rpx;
+  padding: 0 10rpx;
+  > view {
+    line-height: 80rpx;
+    text:nth-child(1) {
+      margin-right: 20rpx;
+    }
+    text:nth-child(2) {
+      color: #666;
+    }
+  }
+}
+.goods-price {
+  height: 60rpx;
+  color: #ff2d4a;
+  font-size: 20px;
+  padding: 0 20rpx;
+}
+
+.goods-title {
+  display: flex;
+  height: 80rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  .right-icon {
+    width: 150rpx;
+    font-size: 30rpx;
+    color: #9e9d9e;
+    border-left: 1px solid #eee;
+    margin-left: 20rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .left-title {
+    flex: 1;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.express {
+  font-size: 24rpx;
+  color: #9e9d9e;
+  padding: 20rpx;
+}
+.goods-detail {
+  padding-bottom: 50px;
+}
+.van-tabs {
+  z-index: 0;
+}
+
+.gParamsBox {
+  padding: 20rpx;
+  font-size: 13px;
+  .gParams {
+    margin: 10rpx 20rpx;
+  }
+}
+.stepper {
+  margin-bottom: 20rpx;
+}
+</style>
+
+<template>
+  <div class="goods-detail">
+    <!-- 轮播图 -->
+    <swiper
+      :indicator-dots="true"
+      indicator-active-color="#fff"
+      :autoplay="true"
+      interval="2000"
+      class="swiper"
+    >
+      <block v-for="(item, index) in goodsDetail.pics" :key="index">
+        <swiper-item>
+          <image
+            src="{{item.pics_big_url}}"
+            class="slide-image"
+            mode="aspectFill"
+            @tap="previewImg(item.pics_big_url)"
+          />
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <!-- 价格 -->
+    <div class="goods-price">
+      <span>￥{{goodsDetail.goods_price}}</span>
+    </div>
+
+    <!-- 商品标题 -->
+    <div class="goods-title">
+      <div class="left-title">{{goodsDetail.goods_name}}</div>
+      <div class="right-icon">
+        <van-icon name="star-o" />
+        <span>收藏</span>
+      </div>
+    </div>
+
+    <div class="express">快递：免运费</div>
+
+    <view class="forsell">
+      <!-- 促销 -->
+      <view>
+        <text>促销</text>
+        <text>满300元减30元</text>
+      </view>
+      <!-- 已选 -->
+      <view>
+        <text>已选</text>
+        <text>黑色/S/1件</text>
+      </view>
+      <view>
+        <text>选择数量</text>
+        <van-stepper class="stepper" value="{{goodsNum}}" max="10" integer bind:change="changeNum" />
+      </view>
+    </view>
+
+    <van-tabs active="{{ activeTab }}">
+      <van-tab name="gDetail" title="商品详情">
+        <!-- <div v-html="goodsDetail.goods_introduce"></div> -->
+        <rich-text class="richText" nodes="{{goodsDetail.goods_introduce}}"></rich-text>
+      </van-tab>
+      <van-tab name="gParams" title="商品参数" class="gParamsBox">
+        <van-row v-for="(item, i) in goodsDetail.attrs" :key="i" class="gParams">
+          <van-col span="10">{{item.attr_name}}：</van-col>
+          <van-col span="14">{{item.attr_vals}}</van-col>
+        </van-row>
+      </van-tab>
+    </van-tabs>
+
+    <!-- footer -->
+    <van-goods-action>
+      <!-- open-type="contact" 打开客服联系人对话窗口 -->
+      <van-goods-action-icon icon="chat-o" text="客服" open-type="contact" />
+      <van-goods-action-icon icon="cart-o" text="购物车" info="{{totalNum}}" link-type="switchTab" url="/pages/cart" />
+      <van-goods-action-button text="加入购物车" type="warning" bind:click="addCart" />
+      <van-goods-action-button text="立即购买" />
+    </van-goods-action>
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  import GoodsReq from '@/api/goods'
+
+  wepy.page({
+    data: {
+      goodsId: null,
+      goodsDetail: {},
+      activeTab: 'gDetail',
+      imgUrls: [],
+      cartGoodsList: [],
+      goodsNum: 1
+    },
+    onLoad (e) {
+      this.goodsId = +e.id
+      this.getGoodsDetail()
+      this.cartGoodsList = wx.getStorageSync('cartGoodsList') || []
+    },
+    methods: {
+      async getGoodsDetail () {
+        let {data: res} = await GoodsReq.goodsDetail(this.goodsId)
+        if (res.meta.status !== 200) {
+          return wepy.baseToast()
+        }
+        res.message.goods_introduce = res.message.goods_introduce.replace(/<img/gi, '<img style="display: block"')
+        this.goodsDetail = res.message
+        this.goodsDetail.pics.map(item => {
+          this.imgUrls.push(item.pics_big_url)
+        })
+      },
+      previewImg (imgUrl) {
+        wx.previewImage({
+          current: imgUrl, // 当前显示图片的http链接
+          urls: this.imgUrls // 需要预览的图片http链接列表
+        })
+      },
+      changeNum (e) {
+        // console.log(e)
+        this.goodsNum = e.$wx.detail
+        // console.log(this.goodsNum)
+      },
+      addCart() {
+        let goodsInfo = {
+          goodsId: this.goodsDetail.goods_id,
+          selectStatus: true,
+          smallImg: this.goodsDetail.goods_small_logo,
+          goodsTitle: this.goodsDetail.goods_name,
+          goodsPrice: this.goodsDetail.goods_price,
+          goodsNum: this.goodsNum
+        }
+        this.cartGoodsList = wx.getStorageSync('cartGoodsList') || []
+        let idx = this.cartGoodsList.findIndex(item => item.goodsId === goodsInfo.goodsId)
+        if (idx !== -1) {
+          this.cartGoodsList[idx].goodsNum += this.goodsNum
+        } else {
+          this.cartGoodsList.push(goodsInfo)
+        }
+        wx.setStorageSync('cartGoodsList', this.cartGoodsList)
+        this.goodsNum = 1
+        wx.showToast({
+          title: '加入购物车成功',
+          icon: 'success',
+          duration: 2000,
+          mask: true
+        })
+      }
+    },
+    computed: {
+      totalNum () {
+        let total = 0
+        this.cartGoodsList.map(item => {
+          total += item.goodsNum
+        })
+        return total
+      }
+    }
+  })
+</script>
+<config>
+{
+    navigationBarTitleText: '商品详情',
+    usingComponents: {
+      'van-tabs': '../static/vant/tabs/index',
+      'van-tab': '../static/vant/tab/index',
+      'van-goods-action': '../static/vant/goods-action/index',
+      'van-goods-action-icon': '../static/vant/goods-action-icon/index',
+      'van-goods-action-button': '../static/vant/goods-action-button/index',
+      'van-row': '../static/vant/row/index',
+      'van-col': '../static/vant/col/index',
+      'van-stepper': '../static/vant/stepper/index'
+    }
+}
+</config>

@@ -1,0 +1,139 @@
+<style lang="less">
+.isLogin {
+  background-color: #ff2d4a;
+  .login-false {
+    height: 400rpx;
+    display: flex;
+    align-items: center;
+    .lf-in {
+      color: #fff;
+      width: 100%;
+      .lf-top {
+        display: flex;
+        justify-content: center;
+        .lf-avatar {
+          margin: 0 70rpx;
+          .lf-avatar-in {
+            width: 120rpx;
+            height: 120rpx;
+            box-sizing: border-box;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4rpx solid #fff;
+            image {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+      .lf-bottom {
+        width: 100%;
+        text-align: center;
+        margin-top: 20rpx;
+        button {
+          background-color: transparent;
+          color: #fff;
+          font-size: 16px;
+          &::after {
+            border: 0;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
+
+<template>
+  <div class="mine">
+    <!-- 头部是否登录 -->
+    <div class="isLogin">
+      <div class="login-true" v-if="isLogin"></div>
+      <div class="login-false">
+        <div class="lf-in">
+          <div class="lf-top">
+            <van-icon name="setting" />
+            <div class="lf-avatar">
+              <div class="lf-avatar-in">
+                <image src="../static/images/default_avatar.jpg" mode="scaleToFit">
+                </image>
+              </div>
+            </div>
+            <van-icon name="smile-comment" />
+          </div>
+          <div class="lf-bottom">
+            <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">请先登录/注册</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  import Login from '@/api/login'
+
+  wepy.page({
+    data: {
+      userInfo: {
+        'user_id': 12,
+        'user_email_code': null,
+        'is_active': null,
+        'user_sex': '男',
+        'user_qq': '',
+        'user_tel': '',
+        'user_xueli': '本科',
+        'user_hobby': '',
+        'user_introduce': null,
+        'create_time': 1525402223,
+        'update_time': 1525402223,
+        'token': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEyLCJpYXQiOjE1MjU0MDIyMjMsImV4cCI6MTUyNTQ4ODYyM30.g-4GtEQNPwT_Xs0Pq7Lrco_9DfHQQsBiOKZerkO-O-o'
+      }
+    },
+    methods: {
+      bindGetUserInfo () {
+        wx.getUserInfo({
+          success: (res) => {
+            wx.login({
+              async success (arg) {
+                console.log(arg)
+                if (arg.code) {
+                  let params = {
+                    code: arg.code,
+                    encryptedData: res.encryptedData,
+                    iv: res.iv,
+                    rawData: res.rawData,
+                    signature: res.signature
+                  }
+                  console.log(params)
+                  let {data} = await Login.login(params)
+                  console.log(data)
+                } else {
+                  console.log('登录失败！' + res.errMsg)
+                }
+              }
+            })
+          },
+          fail: (err) => {
+            console.log(err)
+          }
+        })
+      }
+    },
+    computed: {
+      isLogin() {
+        return Object.keys(this.userInfo).length !== 0
+      }
+    }
+  })
+</script>
+<config>
+{
+    navigationBarTitleText: '我的',
+    usingComponents: {
+      'van-icon': '../static/vant/icon/index'
+    }
+}
+</config>

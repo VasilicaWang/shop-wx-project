@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "分类",
+    "component": true,
+    "usingComponents": {
+        "searchCom": "./../../components/searchCom",
+        "van-sidebar": "./../../static/vant/sidebar/index",
+        "van-sidebar-item": "./../../static/vant/sidebar-item/index"
+    }
+}

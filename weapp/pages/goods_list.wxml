@@ -1,0 +1,17 @@
+
+<view class="goodsList">
+  <view class="searchBox">
+    <view class="searchBoxIn">
+      <icon type="search" size="16" class="searchIcon"></icon>{{obj.query}}
+    </view>
+  </view>
+  <view>
+    <van-card bind_init="_initComponent" wx:for="{{ goodsList }}" wx:for-index="i" wx:for-item="item" wx:key="i" key="{{ item.goods_id }}" price="{{ item.goods_price }}" desc="{{ item.goods_name }}" thumb="{{ item.goods_small_logo }}" data-wpy-evt="7-0" bindtap="_proxy" data-wpytap-a="{{ item }}" class="listCard"></van-card>
+  </view>
+  <view hidden="{{ !(floorstatus) }}" data-wpy-evt="7-1" bindtap="_proxy" class="goTop">
+    <van-icon bind_init="_initComponent" name="arrow-up" size="16">
+    </van-icon>
+  </view>
+  <van-divider bind_init="_initComponent" wx:if="{{ !hasMore }}" contentPosition="center">没有更多了</van-divider>
+
+</view>

@@ -1,0 +1,175 @@
+<style lang="less">
+.searchBox {
+  background-color: #ff2d4a;
+  padding: 20rpx;
+  .searchBoxIn {
+    height: 60rpx;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #999;
+    border-radius: 10rpx;
+    font-size: 14px;
+    .searchIcon {
+      color: #999;
+      margin-right: 10rpx;
+    }
+  }
+}
+.listCard {
+  .van-card {
+    border-radius: 10rpx;
+    margin: 10rpx 10rpx;
+  }
+  .van-card__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .van-card__desc {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: normal !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.goTop {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: #ff2d4a;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  line-height: 60rpx;
+  position: fixed;
+  bottom: 50rpx;
+  right: 50rpx;
+  .icon {
+    color: #fff;
+  }
+}
+</style>
+
+<template>
+  <div class="goodsList">
+    <div class="searchBox">
+      <div class="searchBoxIn">
+        <icon class="searchIcon" type="search" size="16"></icon>{{obj.query}}
+      </div>
+    </div>
+    <div>
+      <van-card class="listCard"
+        v-for="(item, i) in goodsList" :key="item.goods_id"
+        :price="item.goods_price"
+        :desc="item.goods_name"
+        thumb="{{ item.goods_small_logo }}"
+        @tap="jumpToDetail(item.goods_id)"
+      />
+    </div>
+    <div class="goTop" @tap="goTop" v-show="floorstatus">
+      <van-icon name="arrow-up" size="16">
+      </van-icon>
+    </div>
+    <van-divider v-if="!hasMore" contentPosition="center">没有更多了</van-divider>
+
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  import GoodsReq from '@/api/goods'
+
+  wepy.page({
+    data: {
+      obj: {
+        query: '',
+        cid: '',
+        pagenum: 1,
+        pagesize: 10
+      },
+      goodsList: [],
+      total: 0,
+      floorstatus: false,
+      hasMore: true
+    },
+    onLoad (e) {
+      console.log(e)
+      this.obj.query = e.query || ''
+      this.obj.cid = e.cid || ''
+      this.getGoodsList()
+    },
+    methods: {
+      async getGoodsList() {
+        let { data: res } = await GoodsReq.getGoods(this.obj)
+        // console.log(res)
+        if (res.meta.status !== 200) {
+          return wepy.baseToast()
+        }
+        this.goodsList = [...this.goodsList, ...res.message.goods]
+        this.obj.pagenum++
+        this.total = res.message.total
+        wx.stopPullDownRefresh()
+      },
+      goTop: function (e) {  // 一键回到顶部
+        if (wx.pageScrollTo) {
+          wx.pageScrollTo({
+            scrollTop: 0
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+          })
+        }
+      },
+      jumpToDetail (id) {
+        wx.navigateTo({
+          url: `/pages/goodsDetail?id=${id}`
+        })
+      }
+    },
+    onPullDownRefresh () {
+      this.obj.pagenum = 1
+      this.goodsList = []
+      this.hasMore = true
+      this.getGoodsList()
+    },
+    onReachBottom () {
+      if (this.goodsList.length < this.total) {
+        this.getGoodsList()
+      } else {
+        this.hasMore = false
+        wx.showToast({
+          title: '你已经触碰到我的底线了',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    },
+    onPageScroll: function (e) {
+      // console.log(e)
+      if (e.scrollTop > 100) {
+        this.floorstatus = true
+      } else {
+        this.floorstatus = false
+      }
+    }
+  })
+</script>
+<config>
+{
+    navigationBarTitleText: '商品列表',
+    usingComponents: {
+      "van-card": "../static/vant/card/index",
+      "van-icon": "../static/vant/icon/index",
+      'van-divider': '../static/vant/divider/index'
+    }
+}
+</config>

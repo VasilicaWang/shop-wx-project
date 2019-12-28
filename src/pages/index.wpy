@@ -1,0 +1,158 @@
+<style lang="less">
+swiper {
+  height: 350rpx;
+  image {
+    height: 100%;
+    width: 750rpx;
+  }
+}
+.cate-nav {
+  display: flex;
+  justify-content: space-around;
+  margin: 40rpx 0;
+  image {
+    width: 128rpx;
+    height: 140rpx;
+  }
+}
+.floor-item {
+  .floor-title {
+    image {
+      width: 750rpx;
+      height: 60rpx;
+      margin-top: 10rpx;
+    }
+  }
+  .floor-content {
+    padding: 10rpx 20rpx;
+    image {
+      border-radius: 4px;
+    }
+    display: flex;
+    .content-left {
+      display: flex;
+      align-items: center;
+      margin-right: 15rpx;
+      image {
+        width: 250rpx;
+        height: 500rpx;
+      }
+    }
+    .content-right {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-content: space-between;
+      navigator {
+        height: 244rpx;
+      }
+      image {
+        width: 216rpx;
+        height: 244rpx;
+      }
+    }
+  }
+}
+</style>
+
+<template>
+  <div class="home">
+    <searchCom></searchCom>
+    <!-- 轮播图 -->
+    <swiper :indicator-dots="true" :autoplay="true" :interval="2000" :circular="true" indicator-color="#ff2d4a" indicator-active-color="#fff">
+      <block wx:for="{{swiperList}}" wx:key="*this">
+        <swiper-item>
+          <image class="swipeImg" src="{{item.image_src}}" mode="aspectFill"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- 分类列表 -->
+    <div class="cate-nav">
+      <navigator wx:for="{{cateList}}" wx:key="*this" url="{{item.navigator_url}}" :open-type="item.open_type" hover-class="none">
+        <image src="{{item.image_src}}"></image>
+      </navigator>
+    </div>
+    <!-- 楼层区 -->
+    <div class="floor">
+      <div class="floor-item" wx:for="{{floorList}}" wx:key="*this">
+        <div class="floor-title">
+          <image src="{{item.floor_title.image_src}}"></image>
+        </div>
+        <div class="floor-content">
+          <div class="content-left">
+            <navigator url="{{item.product_list[0].navigator_url}}" open-type="{{item.product_list[0].open_type}}" hover-class="none">
+              <image src="{{item.product_list[0].image_src}}"></image>
+            </navigator>
+          </div>
+          <div class="content-right">
+            <navigator url="{{contentItem.navigator_url}}" open-type="{{contentItem.open_type}}" hover-class="none" wx:for="{{item.product_list}}" wx:key="*this" wx:for-item="contentItem" wx:for-index="i" hidden="{{i === 0}}">
+              <image src="{{contentItem.image_src}}"></image>
+            </navigator>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  // @是一个别名 代表根路径
+  import HomeReq from '@/api/HomeReq'
+  import { getGoodsNum } from '@/common/commonFun'
+
+  wepy.page({
+    data: {
+      swiperList: [],
+      cateList: [],
+      floorList: []
+    },
+    onLoad () {
+      // wx.request({
+      //   url: 'https://www.uinav.com/api/public/v1/home/swiperdata',
+      //   success: (res) => {
+      //     this.swiperList = res.data.message
+      //   }
+      // })
+      this.getSwipeList()
+      this.getCateList()
+      this.getFloorData()
+    },
+    onShow() {
+      getGoodsNum()
+    },
+    methods: {
+      async getSwipeList () {
+        let { data: res } = await HomeReq.getSwiper()
+        if (res.meta.status !== 200) {
+          return wepy.baseToast()
+        }
+        this.swiperList = res.message
+      },
+      async getCateList () {
+        let { data: res } = await HomeReq.getCate()
+        if (res.meta.status !== 200) {
+          return wepy.baseToast()
+        }
+        this.cateList = res.message
+      },
+      async getFloorData () {
+        let { data: res } = await HomeReq.getFloor()
+        if (res.meta.status !== 200) {
+          return wepy.baseToast()
+        }
+        this.floorList = res.message
+      }
+    }
+  })
+</script>
+<config>
+{
+    navigationBarTitleText: '首页',
+    usingComponents: {
+      "searchCom": "../components/searchCom.wpy"
+    }
+}
+</config>

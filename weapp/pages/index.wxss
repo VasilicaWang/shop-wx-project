@@ -1,0 +1,52 @@
+swiper {
+  height: 350rpx;
+}
+swiper image {
+  height: 100%;
+  width: 750rpx;
+}
+.cate-nav {
+  display: flex;
+  justify-content: space-around;
+  margin: 40rpx 0;
+}
+.cate-nav image {
+  width: 128rpx;
+  height: 140rpx;
+}
+.floor-item .floor-title image {
+  width: 750rpx;
+  height: 60rpx;
+  margin-top: 10rpx;
+}
+.floor-item .floor-content {
+  padding: 10rpx 20rpx;
+  display: flex;
+}
+.floor-item .floor-content image {
+  border-radius: 4px;
+}
+.floor-item .floor-content .content-left {
+  display: flex;
+  align-items: center;
+  margin-right: 15rpx;
+}
+.floor-item .floor-content .content-left image {
+  width: 250rpx;
+  height: 500rpx;
+}
+.floor-item .floor-content .content-right {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+}
+.floor-item .floor-content .content-right navigator {
+  height: 244rpx;
+}
+.floor-item .floor-content .content-right image {
+  width: 216rpx;
+  height: 244rpx;
+}
+

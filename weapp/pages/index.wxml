@@ -1,0 +1,39 @@
+
+<view class="home">
+  <searchCom bind_init="_initComponent"></searchCom>
+  
+  <swiper indicator-dots="{{ true }}" autoplay="{{ true }}" interval="{{ 2000 }}" circular="{{ true }}" indicator-color="#ff2d4a" indicator-active-color="#fff">
+    <block wx:for="{{swiperList}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item.image_src}}" mode="aspectFill" class="swipeImg"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  
+  <view class="cate-nav">
+    <navigator wx:for="{{cateList}}" wx:key="*this" url="{{item.navigator_url}}" open-type="{{ item.open_type }}" hover-class="none">
+      <image src="{{item.image_src}}"></image>
+    </navigator>
+  </view>
+  
+  <view class="floor">
+    <view wx:for="{{floorList}}" wx:key="*this" class="floor-item">
+      <view class="floor-title">
+        <image src="{{item.floor_title.image_src}}"></image>
+      </view>
+      <view class="floor-content">
+        <view class="content-left">
+          <navigator url="{{item.product_list[0].navigator_url}}" open-type="{{item.product_list[0].open_type}}" hover-class="none">
+            <image src="{{item.product_list[0].image_src}}"></image>
+          </navigator>
+        </view>
+        <view class="content-right">
+          <navigator url="{{contentItem.navigator_url}}" open-type="{{contentItem.open_type}}" hover-class="none" wx:for="{{item.product_list}}" wx:key="*this" wx:for-item="contentItem" wx:for-index="i" hidden="{{i === 0}}">
+            <image src="{{contentItem.image_src}}"></image>
+          </navigator>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+</view>

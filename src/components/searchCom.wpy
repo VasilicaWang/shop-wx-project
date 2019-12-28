@@ -1,0 +1,42 @@
+<style lang="less">
+.searchComBox {
+  background-color: #ff2d4a;
+  padding: 20rpx;
+  .searchBox {
+    height: 70rpx;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #999;
+    border-radius: 10rpx;
+    .searchIcon {
+      color: #999;
+      margin-right: 10rpx;
+    }
+  }
+}
+</style>
+
+<template>
+  <div class="searchComBox">
+    <div class="searchBox" @tap="jumpToSearch">
+      <icon class="searchIcon" type="search" size="18"></icon>搜索
+    </div>
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+
+  wepy.component({
+    methods: {
+      jumpToSearch () {
+        wx.navigateTo({
+          url: '/pages/search'
+        })
+      }
+    }
+  })
+</script>

@@ -1,0 +1,28 @@
+
+<view class="address">
+  <view class="address-body">
+    <radio-group data-wpy-evt="9-0" bindchange="_proxy" class="address-list">
+      <radio wx:for="{{ addressInfo }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" checked="{{item.defaultAddress}}" value="{{item.addressId}}" color="red" class="address-item">
+        <view class="address-info">
+          <view class="address-title">
+            <view class="address-uname">收货姓名：{{item.uname}}</view>
+            <view class="address-mobile">联系方式：{{item.mobile}}</view>
+            <view class="address-detail">详细地址：{{item.address}}</view>
+          </view>
+          <van-icon bind_init="_initComponent" name="delete" data-wpy-evt="9-1" bindtap="_proxy" data-wpytap-a="{{ item }}" class="delAddress"></van-icon>
+        </view>
+      </radio>
+    </radio-group>
+    <van-divider bind_init="_initComponent" contentPosition="center">添加新的收获地址</van-divider>
+    <view class="empty-address">
+      <view data-wpy-evt="9-2" bindtap="_proxy" class="add-btn">添加收获地址</view>
+    </view>
+  </view>
+
+  
+  <van-dialog bind_init="_initComponent" use-slot title="添加地址" show="{{ showField }}" show-cancel-button data-wpy-evt="9-3" bindcancel="_proxy" bindconfirm="_proxy">
+    <van-field bind_init="_initComponent" value="{{ addressField.uname }}" required clearable label="用户名" placeholder="请输入收货人姓名" data-wpy-evt="9-5" bindinput="_proxy"></van-field>
+    <van-field bind_init="_initComponent" value="{{ addressField.mobile }}" required clearable type="number" label="手机号" placeholder="请输入联系方式" data-wpy-evt="9-6" bindinput="_proxy"></van-field>
+    <van-field bind_init="_initComponent" value="{{ addressField.address }}" label="收货地址" placeholder="请输入收货地址" required border="{{ false }}" data-wpy-evt="9-7" bindinput="_proxy"></van-field>
+  </van-dialog>
+</view>

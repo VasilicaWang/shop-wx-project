@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "商品列表",
+    "component": true,
+    "usingComponents": {
+        "van-icon": "./../static/vant/icon/index",
+        "van-divider": "./../static/vant/divider/index",
+        "van-card": "./../static/vant/card/index"
+    }
+}

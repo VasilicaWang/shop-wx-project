@@ -1,0 +1,23 @@
+
+<view class="search">
+  <van-search bind_init="_initComponent" value="{{ searchValue }}" placeholder="请输入搜索关键词" show-action data-wpy-evt="6-0" bindchange="_proxy" bindsearch="_proxy" bindcancel="_proxy"></van-search>
+  
+  <view wx:if="{{ showHis }}">
+    <view class="hisBox-head">
+      <text>最近搜索</text>
+      <van-icon bind_init="_initComponent" name="delete" data-wpy-evt="6-3" bindtap="_proxy"></van-icon>
+    </view>
+    <view class="search-tags">
+      <van-divider bind_init="_initComponent" wx:if="{{ pageHistList.length === 0 }}" contentPosition="center">当前无搜索历史</van-divider>
+      <view wx:else>
+        <van-tag bind_init="_initComponent" round wx:for="{{ pageHistList }}" wx:for-index="i" wx:for-item="item" wx:key="i" key="{{ i }}" data-wpy-evt="6-4" bindtap="_proxy" data-wpytap-a="{{ item }}">{{item}}</van-tag>
+      </view>
+    </view>
+  </view>
+  
+  <van-cell-group bind_init="_initComponent" wx:else>
+    <van-cell bind_init="_initComponent" wx:for="{{ qsearch }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ item.goods_id }}" title="{{item.goods_name}}" data-wpy-evt="6-5" bindtap="_proxy" data-wpytap-a="{{ item }}"></van-cell>
+  </van-cell-group>
+  
+  <van-dialog bind_init="_initComponent" id="van-dialog"></van-dialog>
+</view>

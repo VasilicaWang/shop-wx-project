@@ -1,0 +1,23 @@
+<style lang="less">
+
+</style>
+
+<template>
+  <div class="order">
+    我的
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+
+  wepy.page({
+
+  })
+</script>
+<config>
+{
+    navigationBarTitleText: '订单',
+    usingComponents: {}
+}
+</config>

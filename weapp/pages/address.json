@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "收货地址",
+    "component": true,
+    "usingComponents": {
+        "van-icon": "./../static/vant/icon/index",
+        "van-divider": "./../static/vant/divider/index",
+        "van-dialog": "./../static/vant/dialog/index",
+        "van-field": "./../static/vant/field/index"
+    }
+}

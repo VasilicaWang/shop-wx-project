@@ -1,0 +1,54 @@
+.searchBox {
+  background-color: #ff2d4a;
+  padding: 20rpx;
+}
+.searchBox .searchBoxIn {
+  height: 60rpx;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #999;
+  border-radius: 10rpx;
+  font-size: 14px;
+}
+.searchBox .searchBoxIn .searchIcon {
+  color: #999;
+  margin-right: 10rpx;
+}
+.listCard .van-card {
+  border-radius: 10rpx;
+  margin: 10rpx 10rpx;
+}
+.listCard .van-card__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.listCard .van-card__desc {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.goTop {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: #ff2d4a;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  line-height: 60rpx;
+  position: fixed;
+  bottom: 50rpx;
+  right: 50rpx;
+}
+.goTop .icon {
+  color: #fff;
+}
+

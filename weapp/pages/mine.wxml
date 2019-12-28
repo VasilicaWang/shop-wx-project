@@ -1,0 +1,24 @@
+
+<view class="mine">
+  
+  <view class="isLogin">
+    <view wx:if="{{ isLogin }}" class="login-true"></view>
+    <view class="login-false">
+      <view class="lf-in">
+        <view class="lf-top">
+          <van-icon bind_init="_initComponent" name="setting"></van-icon>
+          <view class="lf-avatar">
+            <view class="lf-avatar-in">
+              <image src="../static/images/default_avatar.jpg" mode="scaleToFit">
+              </image>
+            </view>
+          </view>
+          <van-icon bind_init="_initComponent" name="smile-comment"></van-icon>
+        </view>
+        <view class="lf-bottom">
+          <button open-type="getUserInfo" data-wpy-evt="5-1" bindgetuserinfo="_proxy">请先登录/注册</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+
+<view class="searchComBox">
+  <view data-wpy-evt="28-0" bindtap="_proxy" class="searchBox">
+    <icon type="search" size="18" class="searchIcon"></icon>搜索
+  </view>
+</view>

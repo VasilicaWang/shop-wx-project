@@ -1,0 +1,11 @@
+.hisBox-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 0 10px;
+  font-size: 15px;
+}
+.van-tag {
+  margin: 0 10px;
+}
+

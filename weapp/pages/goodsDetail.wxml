@@ -1,0 +1,66 @@
+
+<view class="goods-detail">
+  
+  <swiper indicator-dots="{{ true }}" indicator-active-color="#fff" autoplay="{{ true }}" interval="2000" class="swiper">
+    <block wx:for="{{ goodsDetail.pics }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}">
+      <swiper-item>
+        <image src="{{item.pics_big_url}}" mode="aspectFill" data-wpy-evt="8-0" bindtap="_proxy" data-wpytap-a="{{ item }}" class="slide-image"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  
+  <view class="goods-price">
+    <label>￥{{goodsDetail.goods_price}}</label>
+  </view>
+
+  
+  <view class="goods-title">
+    <view class="left-title">{{goodsDetail.goods_name}}</view>
+    <view class="right-icon">
+      <van-icon name="star-o"></van-icon>
+      <label>收藏</label>
+    </view>
+  </view>
+
+  <view class="express">快递：免运费</view>
+
+  <view class="forsell">
+    
+    <view>
+      <text>促销</text>
+      <text>满300元减30元</text>
+    </view>
+    
+    <view>
+      <text>已选</text>
+      <text>黑色/S/1件</text>
+    </view>
+    <view>
+      <text>选择数量</text>
+      <van-stepper bind_init="_initComponent" value="{{goodsNum}}" max="10" integer data-wpy-evt="8-1" bindchange="_proxy" class="stepper"></van-stepper>
+    </view>
+  </view>
+
+  <van-tabs bind_init="_initComponent" active="{{ activeTab }}">
+    <van-tab bind_init="_initComponent" name="gDetail" title="商品详情">
+      
+      <rich-text nodes="{{goodsDetail.goods_introduce}}" class="richText"></rich-text>
+    </van-tab>
+    <van-tab bind_init="_initComponent" name="gParams" title="商品参数" class="gParamsBox">
+      <van-row bind_init="_initComponent" wx:for="{{ goodsDetail.attrs }}" wx:for-index="i" wx:for-item="item" wx:key="i" key="{{ i }}" class="gParams">
+        <van-col bind_init="_initComponent" span="10">{{item.attr_name}}：</van-col>
+        <van-col bind_init="_initComponent" span="14">{{item.attr_vals}}</van-col>
+      </van-row>
+    </van-tab>
+  </van-tabs>
+
+  
+  <van-goods-action bind_init="_initComponent">
+    
+    <van-goods-action-icon bind_init="_initComponent" icon="chat-o" text="客服" open-type="contact"></van-goods-action-icon>
+    <van-goods-action-icon bind_init="_initComponent" icon="cart-o" text="购物车" info="{{totalNum}}" link-type="switchTab" url="/pages/cart"></van-goods-action-icon>
+    <van-goods-action-button bind_init="_initComponent" text="加入购物车" type="warning" data-wpy-evt="8-2" bindtap="_proxy"></van-goods-action-button>
+    <van-goods-action-button bind_init="_initComponent" text="立即购买"></van-goods-action-button>
+  </van-goods-action>
+</view>
