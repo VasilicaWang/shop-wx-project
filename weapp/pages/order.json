@@ -1,5 +1,11 @@
 {
     "navigationBarTitleText": "订单",
     "component": true,
-    "usingComponents": {}
+    "usingComponents": {
+        "van-tabs": "./../static/vant/tabs/index",
+        "van-tab": "./../static/vant/tab/index",
+        "van-swipe-cell": "./../static/vant/swipe-cell/index",
+        "van-icon": "./../static/vant/icon/index",
+        "van-divider": "./../static/vant/divider/index"
+    }
 }

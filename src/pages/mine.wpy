@@ -1,6 +1,38 @@
 <style lang="less">
+.mine {
+  background-color: #f9f9f9;
+  padding-bottom: 30rpx;
+}
 .isLogin {
   background-color: #ff2d4a;
+  .login-true {
+    height: 150rpx;
+    .lt-in {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20rpx;
+      color: #fff;
+      .lt-left {
+        display: flex;
+        align-items: center;
+        .lt-avatar {
+          width: 120rpx;
+          height: 120rpx;
+          box-sizing: border-box;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 4rpx solid #fff;
+          margin-right: 20rpx;
+          image {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
   .login-false {
     height: 400rpx;
     display: flex;
@@ -43,20 +75,101 @@
     }
   }
 }
+
+.main {
+  margin: -35rpx 20rpx 0;
+  background-color: #f9f9f9;
+  .main-collect {
+    background-color: #fff;
+    height: 120rpx;
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+    .main-collect-in {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .main-order {
+    background-color: #fff;
+    margin-top: 20rpx;
+    .main-order-title {
+      height: 50rpx;
+      padding: 20rpx;
+      border-bottom: 1px solid #ccc;
+      line-height: 50rpx;
+    }
+    .main-order-content {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 150rpx;
+      .main-order-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 14px;
+      }
+    }
+  }
+  .main-address {
+    margin-top: 20rpx;
+    background-color: #fff;
+    padding: 20rpx;
+    display: flex;
+    justify-content: space-between;
+    &:last-child {
+      color: #999;
+    }
+  }
+  .main-other {
+    background-color: #fff;
+    padding: 0 20rpx;
+    margin-top: 20rpx;
+    [class^="main-other"] {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding: 20rpx 0;
+      &:last-child {
+        border-bottom: 0;
+      }
+      :last-child {
+        color: #999;
+      }
+    }
+  }
+}
 </style>
 
 <template>
   <div class="mine">
-    <!-- 头部是否登录 -->
+    <!-- 登录 -->
     <div class="isLogin">
-      <div class="login-true" v-if="isLogin"></div>
-      <div class="login-false">
+      <div class="login-true" v-if="isLogin">
+        <div class="lt-in">
+          <div class="lt-left">
+            <div class="lt-avatar">
+              <image src="../static/images/default_avatar.jpg" mode="scaleToFit">
+              </image>
+            </div>
+            <span>用户名</span>
+          </div>
+          <div class="lt-right">
+            <van-icon name="setting" />
+            <van-icon name="smile-comment" />
+          </div>
+        </div>
+      </div>
+      <div class="login-false" v-else>
         <div class="lf-in">
           <div class="lf-top">
             <van-icon name="setting" />
             <div class="lf-avatar">
               <div class="lf-avatar-in">
-                <image src="../static/images/default_avatar.jpg" mode="scaleToFit">
+                <image src="../static/images/default_avatar.jpg">
                 </image>
               </div>
             </div>
@@ -65,6 +178,54 @@
           <div class="lf-bottom">
             <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">请先登录/注册</button>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- 主体区 -->
+    <div class="main">
+      <div class="main-collect">
+        <navigator class="main-collect-in" v-for="(item, i) in collectList" :key="i" url="{{item.url}}">
+          <span class="main-collect-num">{{item.num}}</span>
+          <span class="main-collect-title">{{item.title}}</span>
+        </navigator>
+      </div>
+      <div class="main-order">
+        <h3 class="main-order-title">我的订单</h3>
+        <div class="main-order-content">
+          <navigator class="main-order-nav" url="">
+            <van-icon name="balance-o" size="30px" color="#ff2d4a" />
+            待付款
+          </navigator>
+          <navigator class="main-order-nav" url="">
+            <van-icon name="logistics" size="30px" color="#ff2d4a" />
+            待收货
+          </navigator>
+          <navigator class="main-order-nav" url="">
+            <van-icon name="after-sale" size="30px" color="#ff2d4a" />
+            退款/退货
+          </navigator>
+          <navigator class="main-order-nav" url="/pages/order">
+            <van-icon name="records" size="30px" color="#ff2d4a" />
+            全部订单
+          </navigator>
+        </div>
+      </div>
+      <div class="main-address" @tap="editAddress">
+        <span>收货地址管理</span>
+        <van-icon name="arrow" />
+      </div>
+      <div class="main-other">
+        <div class="main-other-serve">
+          <span>联系客服</span>
+          <span>400-618-2000</span>
+        </div>
+        <div class="main-other-suggest">
+          <span>意见反馈</span>
+          <van-icon name="arrow" />
+        </div>
+        <div class="main-other-member">
+          <span>会员中心</span>
+          <van-icon name="arrow" />
         </div>
       </div>
     </div>
@@ -77,7 +238,8 @@
 
   wepy.page({
     data: {
-      userInfo: {
+      userInfo: {},
+      tmp: {
         'user_id': 12,
         'user_email_code': null,
         'is_active': null,
@@ -90,7 +252,13 @@
         'create_time': 1525402223,
         'update_time': 1525402223,
         'token': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEyLCJpYXQiOjE1MjU0MDIyMjMsImV4cCI6MTUyNTQ4ODYyM30.g-4GtEQNPwT_Xs0Pq7Lrco_9DfHQQsBiOKZerkO-O-o'
-      }
+      },
+      collectList: [
+        { num: 0, title: '收藏的店铺', url: '' },
+        { num: 0, title: '收藏的商品', url: '' },
+        { num: 0, title: '关注的商品', url: '' },
+        { num: 0, title: '我的足迹', url: '' }
+      ]
     },
     methods: {
       bindGetUserInfo () {
@@ -120,6 +288,21 @@
             console.log(err)
           }
         })
+      },
+      onChange(event) {
+        this.setData({ active: event.detail })
+      },
+      editAddress () {
+        wx.chooseAddress({
+          success: (res) => {
+            let userAddressInfo = {
+              uname: res.userName,
+              mobile: res.telNumber,
+              address: res.provinceName + res.cityName + res.countyName + res.detailInfo
+            }
+            wx.setStorageSync('userAddressInfo', userAddressInfo)
+          }
+        })
       }
     },
     computed: {
@@ -133,7 +316,10 @@
 {
     navigationBarTitleText: '我的',
     usingComponents: {
-      'van-icon': '../static/vant/icon/index'
+      'van-icon': '../static/vant/icon/index',
+      'van-tabbar': '../static/vant/tabbar/index',
+      'van-tabbar-item': '../static/vant/tabbar-item/index'
+      
     }
 }
 </config>

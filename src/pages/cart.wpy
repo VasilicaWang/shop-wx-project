@@ -267,7 +267,7 @@
         <div>合计: <span class="total-price">{{subPrice}}</span></div>
         <div class="express">包含运费</div>
       </div>
-      <div class="footer-item item-right">
+      <div class="footer-item item-right" @tap="addStatement">
         结算({{totalGoodsNum}})
       </div>
     </div>
@@ -362,6 +362,16 @@
               })
             }
           }
+        })
+      },
+      addStatement () {
+        let orderList = this.cartGoodsList.filter(item => item.selectStatus)
+        orderList.map(item => {
+          item.isOrder = false
+        })
+        wx.setStorageSync('orderList', orderList)
+        wx.navigateTo({
+          url: '/pages/order'
         })
       }
     },

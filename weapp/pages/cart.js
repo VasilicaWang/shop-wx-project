@@ -98,6 +98,18 @@ _core["default"].page({
           }
         }
       });
+    },
+    addStatement: function addStatement() {
+      var orderList = this.cartGoodsList.filter(function (item) {
+        return item.selectStatus;
+      });
+      orderList.map(function (item) {
+        item.isOrder = false;
+      });
+      wx.setStorageSync('orderList', orderList);
+      wx.navigateTo({
+        url: '/pages/order'
+      });
     }
   },
   computed: {
@@ -128,151 +140,116 @@ _core["default"].page({
       return total;
     }
   }
-}, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-stepper":{"path":"..\\static\\vant\\stepper\\index"},"van-swipe-cell":{"path":"..\\static\\vant\\swipe-cell\\index"}},"on":{"4-2":["tap"],"4-4":["change"]}}, handlers: {'4-0': {"tap": function proxy () {
+}, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-stepper":{"path":"..\\static\\vant\\stepper\\index"},"van-swipe-cell":{"path":"..\\static\\vant\\swipe-cell\\index"}},"on":{"4-33":["tap"],"4-35":["change"]}}, handlers: {'4-31': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.goToCategory($event);
       })();
     
-  }},'4-1': {"tap": function proxy () {
+  }},'4-32': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.addAddress($event);
       })();
     
-  }},'4-2': {"tap": function proxy () {
+  }},'4-33': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.addAddress($event);
       })();
     
-  }},'4-3': {"tap": function proxy (index) {
+  }},'4-34': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.changeStatus(index);
       })();
     
-  }},'4-4': {"change": function proxy (item) {
+  }},'4-35': {"change": function proxy (item) {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.changeNum($event, item.goodsId);
       })();
     
-  }},'4-5': {"tap": function proxy (index) {
+  }},'4-36': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.delGoods(index);
       })();
     
-  }},'4-6': {"tap": function proxy () {
+  }},'4-37': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.checkAll(_vm.isAllChoose);
       })();
     
-  }}}, models: {}, refs: undefined }, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-stepper":{"path":"..\\static\\vant\\stepper\\index"},"van-swipe-cell":{"path":"..\\static\\vant\\swipe-cell\\index"}},"on":{"4-2":["tap"],"4-4":["change"]}}, handlers: {'4-0': {"tap": function proxy () {
+  }},'4-38': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.addStatement($event);
+      })();
+    
+  }}}, models: {}, refs: undefined }, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-stepper":{"path":"..\\static\\vant\\stepper\\index"},"van-swipe-cell":{"path":"..\\static\\vant\\swipe-cell\\index"}},"on":{"4-33":["tap"],"4-35":["change"]}}, handlers: {'4-31': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.goToCategory($event);
       })();
     
-  }},'4-1': {"tap": function proxy () {
+  }},'4-32': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.addAddress($event);
       })();
     
-  }},'4-2': {"tap": function proxy () {
+  }},'4-33': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.addAddress($event);
       })();
     
-  }},'4-3': {"tap": function proxy (index) {
+  }},'4-34': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.changeStatus(index);
       })();
     
-  }},'4-4': {"change": function proxy (item) {
+  }},'4-35': {"change": function proxy (item) {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.changeNum($event, item.goodsId);
       })();
     
-  }},'4-5': {"tap": function proxy (index) {
+  }},'4-36': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.delGoods(index);
       })();
     
-  }},'4-6': {"tap": function proxy () {
+  }},'4-37': {"tap": function proxy () {
     
     var _vm=this;
       return (function () {
         _vm.checkAll(_vm.isAllChoose);
       })();
     
-  }}}, models: {}, refs: undefined }, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-stepper":{"path":"..\\static\\vant\\stepper\\index"},"van-swipe-cell":{"path":"..\\static\\vant\\swipe-cell\\index"}},"on":{"4-2":["tap"],"4-4":["change"]}}, handlers: {'4-0': {"tap": function proxy () {
+  }},'4-38': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
-        _vm.goToCategory($event);
-      })();
-    
-  }},'4-1': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.addAddress($event);
-      })();
-    
-  }},'4-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.addAddress($event);
-      })();
-    
-  }},'4-3': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.changeStatus(index);
-      })();
-    
-  }},'4-4': {"change": function proxy (item) {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.changeNum($event, item.goodsId);
-      })();
-    
-  }},'4-5': {"tap": function proxy (index) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.delGoods(index);
-      })();
-    
-  }},'4-6': {"tap": function proxy () {
-    
-    var _vm=this;
-      return (function () {
-        _vm.checkAll(_vm.isAllChoose);
+        _vm.addStatement($event);
       })();
     
   }}}, models: {}, refs: undefined });

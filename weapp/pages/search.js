@@ -133,7 +133,7 @@ _core["default"].page({
       return this.searchValue.trim().length === 0;
     }
   }
-}, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-search":{"path":"..\\static\\vant\\search\\index"},"van-cell":{"path":"..\\static\\vant\\cell\\index"},"van-cell-group":{"path":"..\\static\\vant\\cell-group\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"},"van-tag":{"path":"..\\static\\vant\\tag\\index"},"van-dialog":{"path":"..\\static\\vant\\dialog\\index"}},"on":{"6-0":["change","search","cancel"],"6-3":["tap"],"6-4":["tap"],"6-5":["tap"]}}, handlers: {'6-0': {"change": function proxy () {
+}, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-search":{"path":"..\\static\\vant\\search\\index"},"van-cell-group":{"path":"..\\static\\vant\\cell-group\\index"},"van-cell":{"path":"..\\static\\vant\\cell\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"},"van-tag":{"path":"..\\static\\vant\\tag\\index"},"van-dialog":{"path":"..\\static\\vant\\dialog\\index"}},"on":{"6-0":["change","search","cancel"],"6-3":["tap"],"6-4":["tap"],"6-5":["tap"]}}, handlers: {'6-0': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
@@ -175,7 +175,7 @@ _core["default"].page({
         _vm.jumpDetail(item.goods_id);
       })();
     
-  }}}, models: {}, refs: undefined }, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-search":{"path":"..\\static\\vant\\search\\index"},"van-cell":{"path":"..\\static\\vant\\cell\\index"},"van-cell-group":{"path":"..\\static\\vant\\cell-group\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"},"van-tag":{"path":"..\\static\\vant\\tag\\index"},"van-dialog":{"path":"..\\static\\vant\\dialog\\index"}},"on":{"6-0":["change","search","cancel"],"6-3":["tap"],"6-4":["tap"],"6-5":["tap"]}}, handlers: {'6-0': {"change": function proxy () {
+  }}}, models: {}, refs: undefined }, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-search":{"path":"..\\static\\vant\\search\\index"},"van-cell-group":{"path":"..\\static\\vant\\cell-group\\index"},"van-cell":{"path":"..\\static\\vant\\cell\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"},"van-tag":{"path":"..\\static\\vant\\tag\\index"},"van-dialog":{"path":"..\\static\\vant\\dialog\\index"}},"on":{"6-0":["change","search","cancel"],"6-3":["tap"],"6-4":["tap"],"6-5":["tap"]}}, handlers: {'6-0': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
@@ -217,7 +217,7 @@ _core["default"].page({
         _vm.jumpDetail(item.goods_id);
       })();
     
-  }}}, models: {}, refs: undefined }, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-search":{"path":"..\\static\\vant\\search\\index"},"van-cell":{"path":"..\\static\\vant\\cell\\index"},"van-cell-group":{"path":"..\\static\\vant\\cell-group\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"},"van-tag":{"path":"..\\static\\vant\\tag\\index"},"van-dialog":{"path":"..\\static\\vant\\dialog\\index"}},"on":{"6-0":["change","search","cancel"],"6-3":["tap"],"6-4":["tap"],"6-5":["tap"]}}, handlers: {'6-0': {"change": function proxy () {
+  }}}, models: {}, refs: undefined }, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-search":{"path":"..\\static\\vant\\search\\index"},"van-cell-group":{"path":"..\\static\\vant\\cell-group\\index"},"van-cell":{"path":"..\\static\\vant\\cell\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"},"van-tag":{"path":"..\\static\\vant\\tag\\index"},"van-dialog":{"path":"..\\static\\vant\\dialog\\index"}},"on":{"6-0":["change","search","cancel"],"6-3":["tap"],"6-4":["tap"],"6-5":["tap"]}}, handlers: {'6-0': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {

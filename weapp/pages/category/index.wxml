@@ -2,14 +2,14 @@
 <view class="category">
   <searchCom bind_init="_initComponent"></searchCom>
   <van-sidebar bind_init="_initComponent" active-key="{{ activeKey }}" class="sidebar">
-    <van-sidebar-item bind_init="_initComponent" wx:for="{{ cateList }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ item.cat_id }}" title="{{ item.cat_name }}" data-wpy-evt="3-2" bindtap="_proxy" data-wpytap-a="{{ index }}"></van-sidebar-item>
+    <van-sidebar-item bind_init="_initComponent" wx:for="{{ cateList }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ item.cat_id }}" title="{{ item.cat_name }}" data-wpy-evt="3-0" bindtap="_proxy" data-wpytap-a="{{ index }}"></van-sidebar-item>
   </van-sidebar>
   <view class="details">
     <view wx:for="{{ sideList }}" wx:for-index="i" wx:for-item="item" wx:key="i" key="{{ item.cat_id }}" class="cate-list">
       <view class="cate-title">/ {{item.cat_name}} /</view>
       <view class="content">
         <view wx:for="{{ item.children }}" wx:for-index="index" wx:for-item="miniItem" wx:key="index" key="{{ miniItem.cat_id }}" class="item">
-          <image src="{{miniItem.cat_icon}}" mode="aspectFit" data-wpy-evt="3-3" bindtap="_proxy" data-wpytap-a="{{ miniItem }}"></image>
+          <image src="{{miniItem.cat_icon}}" mode="aspectFit" data-wpy-evt="3-1" bindtap="_proxy" data-wpytap-a="{{ miniItem }}"></image>
           <label>{{miniItem.cat_name}}</label>
         </view>
       </view>

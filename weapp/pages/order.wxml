@@ -1,4 +1,43 @@
 
 <view class="order">
-  我的
+  <van-tabs bind_init="_initComponent" active="{{ active }}" data-wpy-evt="10-49" bindchange="_proxy">
+    <van-tab bind_init="_initComponent" name="allOrder" title="全部订单"></van-tab>
+    <van-tab bind_init="_initComponent" name="unOrder" title="未付款"></van-tab>
+    <van-tab bind_init="_initComponent" name="doneOrder" title="已付款"></van-tab>
+    <van-tab bind_init="_initComponent" name="noOrder" title="退款/退货"></van-tab>
+  </van-tabs>
+  <view wx:if="{{ activeOrderList.length > 0 }}" class="order-list">
+    <view wx:for="{{ activeOrderList }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" class="order-list-item">
+      <van-swipe-cell bind_init="_initComponent" right-width="{{ 60 }}" style="width: 100%;">
+        <view class="order-list-item-in">
+          <view class="order-goods-info">
+            <image src="{{ item.smallImg }}" mode="aspectFill"></image>
+            <view class="goods-info-box">
+              <view class="goods-title">{{item.goodsTitle}}</view>
+              <view class="info-box-bottom">
+                <label class="goods-price">￥{{item.goodsPrice}}</label>
+                <label style="font-size:12px;" class="goods-num">×{{item.goodsNum}}</label>
+              </view>
+            </view>
+          </view>
+          <view class="order-subprice">
+            <text space="ensp">共{{item.goodsNum}}件商品 总计：{{item.goodsNum * item.goodsPrice}} (含运费0.00)</text>
+          </view>
+          <view class="order-number">
+            <label>订单号：GD201912120000000178</label>
+            <label wx:if="{{ !item.isOrder }}" class="order-status">支付</label>
+            <label wx:else style="color: #aaa;" class="order-status">已支付</label>
+          </view>
+        </view>
+        <view slot="right" data-wpy-evt="10-50" bindtap="_proxy" data-wpytap-a="{{ index }}" class="delGoods">删除</view>
+      </van-swipe-cell>
+    </view>
+    <van-divider bind_init="_initComponent" wx:if="{{ !hasMore }}" contentPosition="center">没有更多了</van-divider>
+  </view>
+  <view wx:else class="order-none">
+    <view class="order-none-in">
+      <van-icon bind_init="_initComponent" name="records" size="80px" color="#ff2d4a"></van-icon>
+      <label>暂时没有相关订单</label>
+    </view>
+  </view>
 </view>

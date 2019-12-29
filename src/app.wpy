@@ -14,6 +14,7 @@ import wepy from '@wepy/core'
 
 wepy.app({
   onShow() {
+    // wx38d8faffac4d34d2
     let num = 0
     let cartGoodsList = wx.getStorageSync('cartGoodsList') || []
     cartGoodsList && cartGoodsList.map(item => {

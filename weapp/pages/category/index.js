@@ -79,14 +79,42 @@ _core["default"].page({
       });
     }
   }
-}, {info: {"components":{"searchCom":{"path":"..\\..\\components\\searchCom"},"van-sidebar":{"path":"..\\..\\static\\vant\\sidebar\\index"},"van-sidebar-item":{"path":"..\\..\\static\\vant\\sidebar-item\\index"}},"on":{"3-2":["tap"]}}, handlers: {'3-2': {"tap": function proxy (index) {
+}, {info: {"components":{"searchCom":{"path":"..\\..\\components\\searchCom"},"van-sidebar":{"path":"..\\..\\static\\vant\\sidebar\\index"},"van-sidebar-item":{"path":"..\\..\\static\\vant\\sidebar-item\\index"}},"on":{"3-0":["tap"]}}, handlers: {'3-0': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {
         _vm.getIndex(index);
       })();
     
-  }},'3-3': {"tap": function proxy (miniItem) {
+  }},'3-1': {"tap": function proxy (miniItem) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.jumpToList(miniItem.cat_name);
+      })();
+    
+  }}}, models: {}, refs: undefined }, {info: {"components":{"searchCom":{"path":"..\\..\\components\\searchCom"},"van-sidebar":{"path":"..\\..\\static\\vant\\sidebar\\index"},"van-sidebar-item":{"path":"..\\..\\static\\vant\\sidebar-item\\index"}},"on":{"3-0":["tap"]}}, handlers: {'3-0': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.getIndex(index);
+      })();
+    
+  }},'3-1': {"tap": function proxy (miniItem) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.jumpToList(miniItem.cat_name);
+      })();
+    
+  }}}, models: {}, refs: undefined }, {info: {"components":{"searchCom":{"path":"..\\..\\components\\searchCom"},"van-sidebar":{"path":"..\\..\\static\\vant\\sidebar\\index"},"van-sidebar-item":{"path":"..\\..\\static\\vant\\sidebar-item\\index"}},"on":{"3-0":["tap"]}}, handlers: {'3-0': {"tap": function proxy (index) {
+    
+    var _vm=this;
+      return (function () {
+        _vm.getIndex(index);
+      })();
+    
+  }},'3-1': {"tap": function proxy (miniItem) {
     
     var _vm=this;
       return (function () {

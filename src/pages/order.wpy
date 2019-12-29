@@ -1,10 +1,162 @@
 <style lang="less">
-
+.order-list {
+  background-color: #f9f9f9;
+  margin: 20rpx 0 100rpx;
+}
+.order-list-item {
+  display: flex;
+  margin-top: 20rpx;
+  background-color: #fff;
+  .order-list-item-in {
+    padding: 20rpx 20rpx 0;
+    .order-list-item-in:last-child{
+      padding-bottom: 120rpx;
+      &>.order-goods-info {
+        border: none;
+      }
+    }
+    .order-subprice {
+      height: 65rpx;
+      font-size: 12px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      color: #999;
+    }
+    .order-number {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      height: 65rpx;
+      align-items: center;
+      .order-status {
+        border: 1px solid #ccc;
+        color: #ff2d4a;
+        padding: 3px 8px;
+      }
+    }
+  }
+  .order-goods-status {
+    width: 60rpx;
+    align-self: center;
+  }
+  .order-goods-info {
+    flex: 1;
+    display: flex;
+    padding-bottom: 20rpx;
+    border-bottom: 1px solid #eee;
+    image {
+      align-self: center;
+      width: 150rpx;
+      height: 150rpx;
+      flex-shrink: 0;
+      margin-right: 20rpx;
+    }
+    .goods-info-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      .goods-title {
+        font-size: 14px;
+        margin-bottom: 20rpx;
+        word-break:break-all;
+        display:-webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+      }
+      .info-box-bottom {
+        display: flex;
+        justify-content: space-between;
+        height: 60rpx;
+        line-height: 60rpx;
+        .goods-price {
+          color: #ff2d4a;
+          font-size: 16px;
+        }
+        .count-add,
+        .count-minus {
+          display: inline-block;
+          text-align: center;
+          border: 1px solid #666666;
+          height: 60rpx;
+          width: 60rpx;
+          box-sizing: border-box;
+        }
+        .count {
+          font-size: 14px;
+          margin: 0 20rpx;
+          height: 60rpx;
+          width: 60rpx;
+        }
+      }
+    }
+  }
+  .delGoods {
+    background-color: #ff2d4a;
+    color: #fff;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 0 20rpx;
+  }
+}
+.order-none-in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100rpx;
+  .van-icon {
+    margin-bottom: 20rpx;
+  }
+}
 </style>
 
 <template>
   <div class="order">
-    我的
+    <van-tabs active="{{ active }}" bind:change="onChange">
+      <van-tab name="allOrder" title="全部订单"></van-tab>
+      <van-tab name="unOrder" title="未付款"></van-tab>
+      <van-tab name="doneOrder" title="已付款"></van-tab>
+      <van-tab name="noOrder" title="退款/退货"></van-tab>
+    </van-tabs>
+    <div class="order-list" v-if="activeOrderList.length > 0">
+      <div class="order-list-item" v-for="(item, index) in activeOrderList" :key="index">
+        <van-swipe-cell style="width: 100%;" right-width="{{ 60 }}">
+          <div class="order-list-item-in">
+            <div class="order-goods-info">
+              <image :src="item.smallImg" mode="aspectFill" />
+              <div class="goods-info-box">
+                <h3 class="goods-title">{{item.goodsTitle}}</h3>
+                <div class="info-box-bottom">
+                  <span class="goods-price">￥{{item.goodsPrice}}</span>
+                  <span class="goods-num" style="font-size:12px">×{{item.goodsNum}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="order-subprice">
+              <text space="ensp">共{{item.goodsNum}}件商品 总计：{{item.goodsNum * item.goodsPrice}} (含运费0.00)</text>
+            </div>
+            <div class="order-number">
+              <span>订单号：GD201912120000000178</span>
+              <span class="order-status" v-if="!item.isOrder">支付</span>
+              <span class="order-status" v-else style="color: #aaa;">已支付</span>
+            </div>
+          </div>
+          <view class="delGoods" slot="right" @tap="delOrder(index)">删除</view>
+        </van-swipe-cell>
+      </div>
+      <van-divider v-if="!hasMore" contentPosition="center">没有更多了</van-divider>
+    </div>
+    <div class="order-none" v-else>
+      <div class="order-none-in">
+        <van-icon name="records" size="80px" color="#ff2d4a" />
+        <span>暂时没有相关订单</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -12,12 +164,47 @@
   import wepy from '@wepy/core'
 
   wepy.page({
-
+    data: {
+      active: 'allOrder',
+      orderList: [],
+      activeOrderList: []
+    },
+    onLoad() {
+      this.orderList = wx.getStorageSync('orderList') || []
+      this.activeOrderList = this.orderList
+    },
+    methods: {
+      onChange(e) {
+        switch (e.$wx.detail.name) {
+          case 'allOrder':
+            this.activeOrderList = this.orderList
+            break
+          case 'unOrder':
+            this.activeOrderList = this.orderList.filter(item => !item.isOrder)
+            break
+          case 'doneOrder':
+            this.activeOrderList = this.orderList.filter(item => item.isOrder)
+            break
+          default:
+            this.activeOrderList = []
+            break
+        }
+      },
+      delOrder (i) {
+        console.log(i)
+      }
+    }
   })
 </script>
 <config>
 {
     navigationBarTitleText: '订单',
-    usingComponents: {}
+    usingComponents: {
+      'van-tabs': '../static/vant/tabs/index',
+      'van-tab': '../static/vant/tab/index',
+      'van-swipe-cell': '../static/vant/swipe-cell/index',
+      'van-icon': '../static/vant/icon/index',
+      'van-divider': '../static/vant/divider/index'
+    }
 }
 </config>

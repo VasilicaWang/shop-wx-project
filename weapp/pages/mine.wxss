@@ -1,5 +1,37 @@
+.mine {
+  background-color: #f9f9f9;
+  padding-bottom: 30rpx;
+}
 .isLogin {
   background-color: #ff2d4a;
+}
+.isLogin .login-true {
+  height: 150rpx;
+}
+.isLogin .login-true .lt-in {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+  color: #fff;
+}
+.isLogin .login-true .lt-in .lt-left {
+  display: flex;
+  align-items: center;
+}
+.isLogin .login-true .lt-in .lt-left .lt-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  box-sizing: border-box;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4rpx solid #fff;
+  margin-right: 20rpx;
+}
+.isLogin .login-true .lt-in .lt-left .lt-avatar image {
+  width: 100%;
+  height: 100%;
 }
 .isLogin .login-false {
   height: 400rpx;
@@ -41,5 +73,71 @@
 }
 .isLogin .login-false .lf-in .lf-bottom button::after {
   border: 0;
+}
+.main {
+  margin: -35rpx 20rpx 0;
+  background-color: #f9f9f9;
+}
+.main .main-collect {
+  background-color: #fff;
+  height: 120rpx;
+  display: flex;
+  justify-content: space-around;
+  font-size: 14px;
+}
+.main .main-collect .main-collect-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main .main-order {
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.main .main-order .main-order-title {
+  height: 50rpx;
+  padding: 20rpx;
+  border-bottom: 1px solid #ccc;
+  line-height: 50rpx;
+}
+.main .main-order .main-order-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 150rpx;
+}
+.main .main-order .main-order-content .main-order-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 14px;
+}
+.main .main-address {
+  margin-top: 20rpx;
+  background-color: #fff;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.main .main-address:last-child {
+  color: #999;
+}
+.main .main-other {
+  background-color: #fff;
+  padding: 0 20rpx;
+  margin-top: 20rpx;
+}
+.main .main-other [class^="main-other"] {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding: 20rpx 0;
+}
+.main .main-other [class^="main-other"]:last-child {
+  border-bottom: 0;
+}
+.main .main-other [class^="main-other"] :last-child {
+  color: #999;
 }
 

@@ -14,7 +14,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 _core["default"].page({
   data: {
-    userInfo: {
+    userInfo: {},
+    tmp: {
       'user_id': 12,
       'user_email_code': null,
       'is_active': null,
@@ -27,7 +28,24 @@ _core["default"].page({
       'create_time': 1525402223,
       'update_time': 1525402223,
       'token': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEyLCJpYXQiOjE1MjU0MDIyMjMsImV4cCI6MTUyNTQ4ODYyM30.g-4GtEQNPwT_Xs0Pq7Lrco_9DfHQQsBiOKZerkO-O-o'
-    }
+    },
+    collectList: [{
+      num: 0,
+      title: '收藏的店铺',
+      url: ''
+    }, {
+      num: 0,
+      title: '收藏的商品',
+      url: ''
+    }, {
+      num: 0,
+      title: '关注的商品',
+      url: ''
+    }, {
+      num: 0,
+      title: '我的足迹',
+      url: ''
+    }]
   },
   methods: {
     bindGetUserInfo: function bindGetUserInfo() {
@@ -92,6 +110,23 @@ _core["default"].page({
           console.log(err);
         }
       });
+    },
+    onChange: function onChange(event) {
+      this.setData({
+        active: event.detail
+      });
+    },
+    editAddress: function editAddress() {
+      wx.chooseAddress({
+        success: function success(res) {
+          var userAddressInfo = {
+            uname: res.userName,
+            mobile: res.telNumber,
+            address: res.provinceName + res.cityName + res.countyName + res.detailInfo
+          };
+          wx.setStorageSync('userAddressInfo', userAddressInfo);
+        }
+      });
     }
   },
   computed: {
@@ -99,11 +134,32 @@ _core["default"].page({
       return Object.keys(this.userInfo).length !== 0;
     }
   }
-}, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"}},"on":{}}, handlers: {'5-1': {"getuserinfo": function proxy () {
+}, {info: {"components":{"van-tabbar":{"path":"..\\static\\vant\\tabbar\\index"},"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-tabbar-item":{"path":"..\\static\\vant\\tabbar-item\\index"}},"on":{}}, handlers: {'5-49': {"getuserinfo": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.bindGetUserInfo($event);
+      })();
+    
+  }},'5-50': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.editAddress($event);
+      })();
+    
+  }}}, models: {}, refs: undefined }, {info: {"components":{"van-tabbar":{"path":"..\\static\\vant\\tabbar\\index"},"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-tabbar-item":{"path":"..\\static\\vant\\tabbar-item\\index"}},"on":{}}, handlers: {'5-49': {"getuserinfo": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.bindGetUserInfo($event);
+      })();
+    
+  }},'5-50': {"tap": function proxy () {
+    var $event = arguments[arguments.length - 1];
+    var _vm=this;
+      return (function () {
+        _vm.editAddress($event);
       })();
     
   }}}, models: {}, refs: undefined });
