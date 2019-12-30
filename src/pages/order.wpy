@@ -169,7 +169,8 @@
       orderList: [],
       activeOrderList: []
     },
-    onLoad() {
+    onLoad(obj) {
+      this.active = obj.active
       this.orderList = wx.getStorageSync('orderList') || []
       this.activeOrderList = this.orderList
     },

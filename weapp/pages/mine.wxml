@@ -30,7 +30,7 @@
           <van-icon bind_init="_initComponent" name="smile-comment"></van-icon>
         </view>
         <view class="lf-bottom">
-          <button open-type="getUserInfo" data-wpy-evt="5-49" bindgetuserinfo="_proxy">请先登录/注册</button>
+          <button open-type="getUserInfo" data-wpy-evt="5-0" bindgetuserinfo="_proxy">请先登录/注册</button>
         </view>
       </view>
     </view>
@@ -46,25 +46,25 @@
     <view class="main-order">
       <view class="main-order-title">我的订单</view>
       <view class="main-order-content">
-        <navigator url class="main-order-nav">
+        <navigator url="/pages/order?active=unOrder" class="main-order-nav">
           <van-icon bind_init="_initComponent" name="balance-o" size="30px" color="#ff2d4a"></van-icon>
           待付款
         </navigator>
-        <navigator url class="main-order-nav">
+        <navigator url="/pages/order?active=doneOrder" class="main-order-nav">
           <van-icon bind_init="_initComponent" name="logistics" size="30px" color="#ff2d4a"></van-icon>
           待收货
         </navigator>
-        <navigator url class="main-order-nav">
+        <navigator url="/pages/order?active=noOrder" class="main-order-nav">
           <van-icon bind_init="_initComponent" name="after-sale" size="30px" color="#ff2d4a"></van-icon>
           退款/退货
         </navigator>
-        <navigator url="/pages/order" class="main-order-nav">
+        <navigator url="/pages/order?active=allOrder" class="main-order-nav">
           <van-icon bind_init="_initComponent" name="records" size="30px" color="#ff2d4a"></van-icon>
           全部订单
         </navigator>
       </view>
     </view>
-    <view data-wpy-evt="5-50" bindtap="_proxy" class="main-address">
+    <view data-wpy-evt="5-1" bindtap="_proxy" class="main-address">
       <label>收货地址管理</label>
       <van-icon bind_init="_initComponent" name="arrow"></van-icon>
     </view>

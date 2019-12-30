@@ -159,4 +159,4 @@ _core["default"].page({
       return getFloorData;
     }()
   }
-}, {info: {"components":{"searchCom":{"path":"..\\components\\searchCom"}},"on":{}}, handlers: {}, models: {}, refs: undefined }, {info: {"components":{"searchCom":{"path":"..\\components\\searchCom"}},"on":{}}, handlers: {}, models: {}, refs: undefined }, {info: {"components":{"searchCom":{"path":"..\\components\\searchCom"}},"on":{}}, handlers: {}, models: {}, refs: undefined });
+}, {info: {"components":{"searchCom":{"path":"..\\components\\searchCom"}},"on":{}}, handlers: {}, models: {}, refs: undefined });

@@ -1,6 +1,6 @@
 
 <view class="order">
-  <van-tabs bind_init="_initComponent" active="{{ active }}" data-wpy-evt="10-49" bindchange="_proxy">
+  <van-tabs bind_init="_initComponent" active="{{ active }}" data-wpy-evt="10-0" bindchange="_proxy">
     <van-tab bind_init="_initComponent" name="allOrder" title="全部订单"></van-tab>
     <van-tab bind_init="_initComponent" name="unOrder" title="未付款"></van-tab>
     <van-tab bind_init="_initComponent" name="doneOrder" title="已付款"></van-tab>
@@ -29,7 +29,7 @@
             <label wx:else style="color: #aaa;" class="order-status">已支付</label>
           </view>
         </view>
-        <view slot="right" data-wpy-evt="10-50" bindtap="_proxy" data-wpytap-a="{{ index }}" class="delGoods">删除</view>
+        <view slot="right" data-wpy-evt="10-1" bindtap="_proxy" data-wpytap-a="{{ index }}" class="delGoods">删除</view>
       </van-swipe-cell>
     </view>
     <van-divider bind_init="_initComponent" wx:if="{{ !hasMore }}" contentPosition="center">没有更多了</van-divider>

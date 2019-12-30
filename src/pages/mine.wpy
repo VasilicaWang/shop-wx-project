@@ -192,19 +192,19 @@
       <div class="main-order">
         <h3 class="main-order-title">我的订单</h3>
         <div class="main-order-content">
-          <navigator class="main-order-nav" url="">
+          <navigator class="main-order-nav" url="/pages/order?active=unOrder">
             <van-icon name="balance-o" size="30px" color="#ff2d4a" />
             待付款
           </navigator>
-          <navigator class="main-order-nav" url="">
+          <navigator class="main-order-nav" url="/pages/order?active=doneOrder">
             <van-icon name="logistics" size="30px" color="#ff2d4a" />
             待收货
           </navigator>
-          <navigator class="main-order-nav" url="">
+          <navigator class="main-order-nav" url="/pages/order?active=noOrder">
             <van-icon name="after-sale" size="30px" color="#ff2d4a" />
             退款/退货
           </navigator>
-          <navigator class="main-order-nav" url="/pages/order">
+          <navigator class="main-order-nav" url="/pages/order?active=allOrder">
             <van-icon name="records" size="30px" color="#ff2d4a" />
             全部订单
           </navigator>

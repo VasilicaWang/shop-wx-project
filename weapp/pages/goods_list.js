@@ -143,32 +143,4 @@ _core["default"].page({
         _vm.goTop($event);
       })();
     
-  }}}, models: {}, refs: undefined }, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"},"van-card":{"path":"..\\static\\vant\\card\\index"}},"on":{"7-0":["tap"]}}, handlers: {'7-0': {"tap": function proxy (item) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.jumpToDetail(item.goods_id);
-      })();
-    
-  }},'7-1': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.goTop($event);
-      })();
-    
-  }}}, models: {}, refs: undefined }, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"},"van-card":{"path":"..\\static\\vant\\card\\index"}},"on":{"7-0":["tap"]}}, handlers: {'7-0': {"tap": function proxy (item) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.jumpToDetail(item.goods_id);
-      })();
-    
-  }},'7-1': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.goTop($event);
-      })();
-    
   }}}, models: {}, refs: undefined });

@@ -146,46 +146,4 @@ _core["default"].page({
         _vm.addCart($event);
       })();
     
-  }}}, models: {}, refs: undefined }, {info: {"components":{"van-stepper":{"path":"..\\static\\vant\\stepper\\index"},"van-tabs":{"path":"..\\static\\vant\\tabs\\index"},"van-tab":{"path":"..\\static\\vant\\tab\\index"},"van-goods-action":{"path":"..\\static\\vant\\goods-action\\index"},"van-goods-action-icon":{"path":"..\\static\\vant\\goods-action-icon\\index"},"van-goods-action-button":{"path":"..\\static\\vant\\goods-action-button\\index"},"van-row":{"path":"..\\static\\vant\\row\\index"},"van-col":{"path":"..\\static\\vant\\col\\index"}},"on":{"8-1":["change"],"8-2":["tap"]}}, handlers: {'8-0': {"tap": function proxy (item) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.previewImg(item.pics_big_url);
-      })();
-    
-  }},'8-1': {"change": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.changeNum($event);
-      })();
-    
-  }},'8-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.addCart($event);
-      })();
-    
-  }}}, models: {}, refs: undefined }, {info: {"components":{"van-stepper":{"path":"..\\static\\vant\\stepper\\index"},"van-tabs":{"path":"..\\static\\vant\\tabs\\index"},"van-tab":{"path":"..\\static\\vant\\tab\\index"},"van-goods-action":{"path":"..\\static\\vant\\goods-action\\index"},"van-goods-action-icon":{"path":"..\\static\\vant\\goods-action-icon\\index"},"van-goods-action-button":{"path":"..\\static\\vant\\goods-action-button\\index"},"van-row":{"path":"..\\static\\vant\\row\\index"},"van-col":{"path":"..\\static\\vant\\col\\index"}},"on":{"8-1":["change"],"8-2":["tap"]}}, handlers: {'8-0': {"tap": function proxy (item) {
-    
-    var _vm=this;
-      return (function () {
-        _vm.previewImg(item.pics_big_url);
-      })();
-    
-  }},'8-1': {"change": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.changeNum($event);
-      })();
-    
-  }},'8-2': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.addCart($event);
-      })();
-    
   }}}, models: {}, refs: undefined });

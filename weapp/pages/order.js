@@ -10,7 +10,8 @@ _core["default"].page({
     orderList: [],
     activeOrderList: []
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad(obj) {
+    this.active = obj.active;
     this.orderList = wx.getStorageSync('orderList') || [];
     this.activeOrderList = this.orderList;
   },
@@ -42,14 +43,14 @@ _core["default"].page({
       console.log(i);
     }
   }
-}, {info: {"components":{"van-tabs":{"path":"..\\static\\vant\\tabs\\index"},"van-tab":{"path":"..\\static\\vant\\tab\\index"},"van-swipe-cell":{"path":"..\\static\\vant\\swipe-cell\\index"},"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"}},"on":{"10-49":["change"]}}, handlers: {'10-49': {"change": function proxy () {
+}, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-swipe-cell":{"path":"..\\static\\vant\\swipe-cell\\index"},"van-divider":{"path":"..\\static\\vant\\divider\\index"},"van-tabs":{"path":"..\\static\\vant\\tabs\\index"},"van-tab":{"path":"..\\static\\vant\\tab\\index"}},"on":{"10-0":["change"]}}, handlers: {'10-0': {"change": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.onChange($event);
       })();
     
-  }},'10-50': {"tap": function proxy (index) {
+  }},'10-1': {"tap": function proxy (index) {
     
     var _vm=this;
       return (function () {

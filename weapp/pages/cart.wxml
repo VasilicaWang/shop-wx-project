@@ -3,12 +3,12 @@
   <view wx:if="{{ cartGoodsList.length === 0 }}" class="empty-cart">
     <image src="/static/images/cart_empty@2x.png" mode="aspectFill"></image>
     <view class="empty-cart-text">购物车还是空的</view>
-    <view data-wpy-evt="4-31" bindtap="_proxy" class="shop-btn">去逛逛</view>
+    <view data-wpy-evt="4-0" bindtap="_proxy" class="shop-btn">去逛逛</view>
   </view>
 
   <view wx:else class="cart-body">
     <view wx:if="{{ isAddressEmpty }}" class="empty-address">
-      <view data-wpy-evt="4-32" bindtap="_proxy" class="add-btn">添加地址</view>
+      <view data-wpy-evt="4-1" bindtap="_proxy" class="add-btn">添加地址</view>
     </view>
     <view wx:else class="address">
       <view class="user-info">
@@ -17,7 +17,7 @@
       </view>
       <view class="user-address">
         <label>收货地址：{{addressInfo.address}}</label>
-        <van-icon bind_init="_initComponent" name="edit" data-wpy-evt="4-33" bindtap="_proxy"></van-icon>
+        <van-icon bind_init="_initComponent" name="edit" data-wpy-evt="4-2" bindtap="_proxy"></van-icon>
       </view>
     </view>
     <image src="/static/images/cart_border@2x.png" class="cart-border"></image>
@@ -29,7 +29,7 @@
       <view wx:for="{{ cartGoodsList }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" class="cart-list-item">
         <van-swipe-cell bind_init="_initComponent" right-width="{{ 60 }}" style="width: 100%;">
           <view class="cart-list-item-in">
-            <view data-wpy-evt="4-34" bindtap="_proxy" data-wpytap-a="{{ index }}" class="cart-goods-status">
+            <view data-wpy-evt="4-3" bindtap="_proxy" data-wpytap-a="{{ index }}" class="cart-goods-status">
               <van-icon bind_init="_initComponent" name="checked" color="red" wx:if="{{ item.selectStatus }}"></van-icon>
               <van-icon bind_init="_initComponent" name="circle" color="red" wx:else></van-icon>
             </view>
@@ -40,13 +40,13 @@
                 <view class="info-box-bottom">
                   <label class="goods-price">￥{{item.goodsPrice}}</label>
                   <view class="goods-count">
-                    <van-stepper bind_init="_initComponent" value="{{item.goodsNum}}" max="10" integer button-size="20px" data-wpy-evt="4-35" bindchange="_proxy" data-wpychange-a="{{ item }}" class="stepper"></van-stepper>
+                    <van-stepper bind_init="_initComponent" value="{{item.goodsNum}}" max="10" integer button-size="20px" data-wpy-evt="4-4" bindchange="_proxy" data-wpychange-a="{{ item }}" class="stepper"></van-stepper>
                   </view>
                 </view>
               </view>
             </view>
           </view>
-          <view slot="right" data-wpy-evt="4-36" bindtap="_proxy" data-wpytap-a="{{ index }}" class="delGoods">删除</view>
+          <view slot="right" data-wpy-evt="4-5" bindtap="_proxy" data-wpytap-a="{{ index }}" class="delGoods">删除</view>
         </van-swipe-cell>
       </view>
     </view>
@@ -54,7 +54,7 @@
 
   
   <view class="footer">
-    <view data-wpy-evt="4-37" bindtap="_proxy" class="footer-item item-left">
+    <view data-wpy-evt="4-6" bindtap="_proxy" class="footer-item item-left">
       <van-icon bind_init="_initComponent" name="checked" color="red" wx:if="{{ isAllChoose }}"></van-icon>
       <van-icon bind_init="_initComponent" name="circle" color="red" wx:else></van-icon>
       <label>全选</label>
@@ -63,7 +63,7 @@
       <view>合计: <label class="total-price">{{subPrice}}</label></view>
       <view class="express">包含运费</view>
     </view>
-    <view data-wpy-evt="4-38" bindtap="_proxy" class="footer-item item-right">
+    <view data-wpy-evt="4-7" bindtap="_proxy" class="footer-item item-right">
       结算({{totalGoodsNum}})
     </view>
   </view>

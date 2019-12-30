@@ -134,28 +134,14 @@ _core["default"].page({
       return Object.keys(this.userInfo).length !== 0;
     }
   }
-}, {info: {"components":{"van-tabbar":{"path":"..\\static\\vant\\tabbar\\index"},"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-tabbar-item":{"path":"..\\static\\vant\\tabbar-item\\index"}},"on":{}}, handlers: {'5-49': {"getuserinfo": function proxy () {
+}, {info: {"components":{"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-tabbar":{"path":"..\\static\\vant\\tabbar\\index"},"van-tabbar-item":{"path":"..\\static\\vant\\tabbar-item\\index"}},"on":{}}, handlers: {'5-0': {"getuserinfo": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
         _vm.bindGetUserInfo($event);
       })();
     
-  }},'5-50': {"tap": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.editAddress($event);
-      })();
-    
-  }}}, models: {}, refs: undefined }, {info: {"components":{"van-tabbar":{"path":"..\\static\\vant\\tabbar\\index"},"van-icon":{"path":"..\\static\\vant\\icon\\index"},"van-tabbar-item":{"path":"..\\static\\vant\\tabbar-item\\index"}},"on":{}}, handlers: {'5-49': {"getuserinfo": function proxy () {
-    var $event = arguments[arguments.length - 1];
-    var _vm=this;
-      return (function () {
-        _vm.bindGetUserInfo($event);
-      })();
-    
-  }},'5-50': {"tap": function proxy () {
+  }},'5-1': {"tap": function proxy () {
     var $event = arguments[arguments.length - 1];
     var _vm=this;
       return (function () {
